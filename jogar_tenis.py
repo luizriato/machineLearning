@@ -6,23 +6,31 @@ import pandas as pd
 from sklearn.neural_network import MLPClassifier
 
 #%% CARGA DOS DADOS
+
 df_jogar = pd.read_csv('jogarTenis.csv')
 print('Tabela de dados:\n', df_jogar)
+
 input('Aperte uma tecla para continuar: \n')
 
 #%% SELEÇÃO DOS DADOS
 # rotulos ou marcadores
+
 dias = df_jogar['Dia']
+
 print("Rotulos:\n", dias)
 input('Aperte uma tecla para continuar: \n')
 
 # matriz de treinamento (registros com campos ou atributos)
+
 X = df_jogar.loc[:, 'Aparencia':'Vento']   # de Aparência até Vento
+
 print("Matriz de entradas (treinamento):\n", X)
 input('Aperte uma tecla para continuar: \n')
 
 # vetor de classes
+
 y = df_jogar['Joga']
+
 print("Vetor de classes (treinamento):\n", y)
 input('Aperte uma tecla para continuar: \n')
 
@@ -31,7 +39,9 @@ from sklearn.preprocessing import OneHotEncoder
 
 # One-Hot Encoding
 encoder = OneHotEncoder(sparse_output=False)
+
 X = encoder.fit_transform( df_jogar.loc[:, 'Aparencia':'Vento'] )
+
 print("Matriz de entradas codificadas:\n", X)
 input('Aperte uma tecla para continuar: \n')
 
@@ -50,7 +60,9 @@ for caso in X :
     print('caso: ', caso, ' previsto: ', mlp.predict([caso]) )
 
 #%% teste de dado "não visto:"
+
 X = ['nublado','fria','alta','fraco']
+
 
 # X1 = encoder.fit_transform([X])  Não ajustar (fit) para o novo dado!!!
 # Em vez, utilize o encoder já gerado:
